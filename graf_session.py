@@ -117,15 +117,14 @@ def main(name_file='default.png', path='qwe'):
     ax.plot(aver_rate, color[x])
     x+=1
 
-    #ax.set_xticks((range(1, count_scans)))
-    print min(aver_rate)*4/5, max(aver_rate)*5/4
     plt.axis([1, count_scans-1, min(aver_rate)*0.9, max(aver_rate)*1.1]) # задание [xmin, xmax, ymin, ymax]
     sum_time = str((datetime.timedelta(seconds=int(sum(aver_time))))).split(':')
     plt.text(count_scans*0.07,
-            max(aver_rate)*43/42,
-            u'Общее время передачи данных сеанса - %sч %sм %sс'%(sum_time[0],
+            max(aver_rate)*1.03,
+            u'Общее время передачи данных сеанса: %sч %sм %sс\nСредняя скорость передачи данных: %sМб/с'%(sum_time[0],
                                                                 sum_time[1],
-                                                                sum_time[2]),
+                                                                sum_time[2],
+                                                                int(sum(aver_rate)/len(aver_rate))),
                                                                 horizontalalignment='left',
                                                                 verticalalignment='center')
     #plt.axis('tight')

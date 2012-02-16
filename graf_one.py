@@ -2,6 +2,7 @@
 
 import sys
 import os
+import datetime
 
 #from numpy import exp, linspace
 import matplotlib.pyplot as plt
@@ -23,7 +24,6 @@ class Create_of_Graf():
     >>>
 
     """
-
     def __init__(self, name_file, out_name):
         self.name_file=name_file
         self.out_name = out_name
@@ -78,7 +78,15 @@ class Create_of_Graf():
         plt.xlabel(u'Время, с')    # обозначение оси абсцисс
         plt.ylabel(u'Скорость, Мбит/с')    # обозначение оси ординат
         aver = sum(rate, 0.0) / len(rate)
-        plt.text(1.5, max(rate)*9/8,u'Средняя скорость %s'%str(aver)[0:5], horizontalalignment='left', verticalalignment='center')
+        end_time = str((datetime.timedelta(seconds=int(max(time))))).split(':')
+        plt.text(max(time)*0.07,
+                max(rate)*1.1,
+                u'Средняя скорость передачи данных: %sМб/с\nВремя передачи данных: %sч %sм %sс'%(str(aver)[0:5],
+                                                                end_time[0],
+                                                                end_time[1],
+                                                                end_time[2],),
+                                                                horizontalalignment='left',
+                                                                verticalalignment='center')
         plt.savefig(name_file, dpi=200)
 
     def main(self):
